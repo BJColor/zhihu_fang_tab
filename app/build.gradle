@@ -16,6 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        release {
+            v2SigningEnabled false
+        }
+        debug {
+            v2SigningEnabled false
+        }
+    }
 }
 
 dependencies {
