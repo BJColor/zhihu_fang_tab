@@ -6,8 +6,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.bjcolor.myapplication.adapter.TwoFragmentAdapter;
-
 /**
  * Created by BJColor on 2018/7/12.
  */
@@ -55,7 +53,8 @@ public class SynchroScrollingTab implements TabLayout.OnTabSelectedListener {
         recyclerView.setLayoutManager(advertiseLinearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         if (adapter == null) {
-            adapter = new TwoFragmentAdapter(mContext, strings);
+//            adapter = new TwoFragmentAdapter(mContext, strings);
+            return;
         }
         recyclerView.setAdapter(adapter);
 
