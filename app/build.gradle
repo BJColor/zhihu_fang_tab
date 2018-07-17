@@ -17,10 +17,18 @@ android {
         }
     }
     signingConfigs {
-        release {
+        debug {
+            storeFile file("keystore/bjcolor.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
             v2SigningEnabled false
         }
-        debug {
+        release {
+            storeFile file("keystore/bjcolor.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
             v2SigningEnabled false
         }
     }
