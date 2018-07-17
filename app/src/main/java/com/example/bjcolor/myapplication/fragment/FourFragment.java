@@ -5,7 +5,9 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bjcolor.myapplication.R;
@@ -17,12 +19,13 @@ import com.example.bjcolor.myapplication.tab.SynchroScrollingTab;
  * Created by BJColor on 2018/7/6.
  */
 
-public class FourFragment extends BaseFragment {
+public class FourFragment extends BaseFragment implements View.OnClickListener {
     private TabLayout mTabLayout;
     private RecyclerView recyclerView;
     private String[] strings = new String[]{"说说", "空间", "QQ", "微信", "头条", "热点", "娱乐", "体育", "新闻", "采访", "现场", "LIVE", "世界杯", "感动中国", "CCTV", "世界报道"};
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
+    private ImageView icon;
 
     @Override
     protected int contentView() {
@@ -35,6 +38,8 @@ public class FourFragment extends BaseFragment {
         toolbar = (Toolbar) f(R.id.toolbar);
         appBarLayout = f(R.id.appbar);
         recyclerView = f(R.id.recycleView);
+        icon = f(R.id.iv_icon);
+        icon.setOnClickListener(this);
     }
 
 
@@ -46,6 +51,10 @@ public class FourFragment extends BaseFragment {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+//                appBarLayout.getTotalScrollRange()  bar的总高度   1032
+//                verticaloffset   距离    -1032
+
+                Log.e("mzzzzzzzzzz;", verticalOffset + "");
                 toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.black), Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
             }
         });
@@ -78,5 +87,10 @@ public class FourFragment extends BaseFragment {
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(getActivity(), "头像", Toast.LENGTH_SHORT).show();
     }
 }

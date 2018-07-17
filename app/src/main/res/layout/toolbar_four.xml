@@ -21,16 +21,16 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/timg" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/bg" />
 
 
         <android.support.v7.widget.Toolbar
-            android:paddingTop="20dp"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
+            android:paddingTop="20dp"
             app:layout_collapseMode="pin"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -42,6 +42,58 @@
                 android:textSize="22sp" />
 
         </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:src="@mipmap/img" />
+
+            <TextView
+                android:id="@+id/tv_nick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_icon"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="BJColor"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_nick"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_fs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="粉丝"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tv_gz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:text="关注"
+                    android:textSize="25sp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
     </android.support.design.widget.CollapsingToolbarLayout>
 
 
