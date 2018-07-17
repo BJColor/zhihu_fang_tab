@@ -29,9 +29,12 @@ public class SynchroScrollingTab implements TabLayout.OnTabSelectedListener {
     }
 
     public void setTab(RecyclerView mre, RecyclerView.Adapter madapter, TabLayout tabLayout, String[] ss) {
-        mTabLayout = tabLayout;
-        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        if (tabLayout != null) {
+            mTabLayout = tabLayout;
+            mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
+
         recyclerView = mre;
         adapter = madapter;
         strings = ss;
@@ -39,17 +42,23 @@ public class SynchroScrollingTab implements TabLayout.OnTabSelectedListener {
     }
 
     private void initUI() {
-        for (int i = 0; i < strings.length; i++) {
-            mTabLayout.addTab(mTabLayout.newTab());
-            // TabLayout添加文本
-            mTabLayout.getTabAt(i).setText(strings[i]);
+        if (mTabLayout != null) {
+            for (int i = 0; i < strings.length; i++) {
+                mTabLayout.addTab(mTabLayout.newTab());
+                // TabLayout添加文本
+                mTabLayout.getTabAt(i).setText(strings[i]);
+            }
+            mTabLayout.addOnTabSelectedListener(this);
         }
+
         advertiseLinearLayoutManager = new Bm_LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(advertiseLinearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
-        adapter = new TwoFragmentAdapter(mContext, strings);
+        if (adapter == null) {
+            adapter = new TwoFragmentAdapter(mContext, strings);
+        }
         recyclerView.setAdapter(adapter);
-        mTabLayout.addOnTabSelectedListener(this);
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -58,7 +67,9 @@ public class SynchroScrollingTab implements TabLayout.OnTabSelectedListener {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
+                if (mTabLayout == null) {
+                    return;
+                }
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
                 int totalItemCount = manager.getItemCount();

@@ -5,6 +5,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.bjcolor.myapplication.R;
 import com.example.bjcolor.myapplication.adapter.ListAdapter;
@@ -38,13 +40,26 @@ public class FourFragment extends BaseFragment {
 
     @Override
     protected void initUI() {
-        ListAdapter adapter = new ListAdapter(strings);
+        ListAdapter adapter = new ListAdapter(strings, getActivity());
         new SynchroScrollingTab(getActivity()).setTab(recyclerView, adapter, mTabLayout, strings);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.black), Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
+            }
+        });
+        adapter.setItemClick(new ListAdapter.ItemClick() {
+            @Override
+            public void setItemOnClick(View view, int pos) {
+                switch (view.getId()) {
+                    case R.id.tv_content:
+                        Toast.makeText(getActivity(), "内容---" + pos, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.list_item:
+                        Toast.makeText(getActivity(), "条目---" + pos, Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
     }

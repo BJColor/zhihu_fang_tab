@@ -28,6 +28,7 @@
             android:textSize="@dimen/abc_text_size_subhead_material" />
 
         <TextView
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/content2" />

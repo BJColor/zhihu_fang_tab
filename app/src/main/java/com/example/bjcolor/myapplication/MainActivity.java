@@ -1,5 +1,6 @@
 package com.example.bjcolor.myapplication;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.bjcolor.myapplication.base.BaseActivity;
@@ -62,7 +64,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void setSavedInstanceState(Bundle savedInstanceState) {
         supportFragmentManager = getSupportFragmentManager();
-
+        hideBottomUIMenu();
         if (savedInstanceState != null) {
             oneFragment = (OneFragment) supportFragmentManager.findFragmentByTag(fragmentTags[0]);
             twoFragment = (TwoFragment) supportFragmentManager.findFragmentByTag(fragmentTags[1]);
@@ -183,5 +185,23 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    /**
+     * 隐藏虚拟按键，并且全屏
+     */
+    protected void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+            //for new api versions.
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
     }
 }
