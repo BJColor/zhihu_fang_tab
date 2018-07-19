@@ -18,16 +18,18 @@
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:titleEnabled="false">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@mipmap/bg" />
 
         <RelativeLayout
+
+            android:id="@+id/bar_rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/bg" />
 
             <ImageView
                 android:id="@+id/iv_icon"

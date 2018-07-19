@@ -14,9 +14,10 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:collapsedTitleGravity="left"
         app:contentScrim="@color/black"
+        app:statusBarScrim="@android:color/transparent"
         app:expandedTitleGravity="center_horizontal"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:statusBarScrim="@android:color/transparent">
+       >
 
         <ImageView
             android:layout_width="match_parent"

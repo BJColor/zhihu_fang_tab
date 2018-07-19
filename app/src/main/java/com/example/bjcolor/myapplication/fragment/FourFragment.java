@@ -1,6 +1,5 @@
 package com.example.bjcolor.myapplication.fragment;
 
-import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.bjcolor.myapplication.R;
 import com.example.bjcolor.myapplication.adapter.ListAdapter;
 import com.example.bjcolor.myapplication.base.BaseFragment;
 import com.example.bjcolor.myapplication.tab.SynchroScrollingTab;
+import com.example.bjcolor.myapplication.utils.ColorUtil;
 
 /**
  * Created by BJColor on 2018/7/6.
@@ -26,6 +27,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     private ImageView icon;
+    private RelativeLayout barRl;
 
     @Override
     protected int contentView() {
@@ -38,6 +40,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
         toolbar = (Toolbar) f(R.id.toolbar);
         appBarLayout = f(R.id.appbar);
         recyclerView = f(R.id.recycleView);
+        barRl = f(R.id.bar_rl);
         icon = f(R.id.iv_icon);
         icon.setOnClickListener(this);
     }
@@ -55,7 +58,8 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
 //                verticaloffset   距离    -1032
 
                 Log.e("mzzzzzzzzzz;", verticalOffset + "");
-                toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.black), Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
+                toolbar.setBackgroundColor(ColorUtil.changeAlpha(getResources().getColor(R.color.black), Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
+                barRl.setAlpha(1.0f - Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange());
             }
         });
         adapter.setItemClick(new ListAdapter.ItemClick() {
@@ -73,16 +77,6 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-    /**
-     * 根据百分比改变颜色透明度
-     */
-    public int changeAlpha(int color, float fraction) {
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        int alpha = (int) (Color.alpha(color) * fraction);
-        return Color.argb(alpha, red, green, blue);
-    }
 
     @Override
     protected void initData() {

@@ -3,6 +3,7 @@
 <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/appbar"
+    android:background="@color/blue_black"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
@@ -11,28 +12,35 @@
     <android.support.design.widget.CollapsingToolbarLayout
         android:id="@+id/collapsing_toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:contentScrim="@color/black"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-        app:statusBarScrim="@android:color/transparent"
-        app:titleEnabled="false">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-        <ImageView
+        <include
+            android:id="@+id/include_titl_big"
+            layout="@layout/include_title_big"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/timg" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.7" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:minHeight="?attr/actionBarSize"
+            android:layout_height="50dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
             app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Title">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+            <include
+                android:id="@+id/include_toolbar_search"
+                layout="@layout/include_toolbar_search" />
+            <include
+                android:id="@+id/include_toolbar_small"
+                layout="@layout/include_toolbar_small" />
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.CollapsingToolbarLayout>
